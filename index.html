@@ -69,6 +69,7 @@
           });
           return;
         }
+        if(isAndroid) {
         var appLink = document.getElementById('appLink');
         if (appLink) {
           appLink.addEventListener('click', function () {
@@ -77,8 +78,9 @@
               window.location.href = 'https://play.google.com/store/apps/details?id=network.sharering.identifime'
             }, 300);
           });
-          return
         }
+        return
+      }
         window.location.href = 'https://www.sharering.network/'
 
       });
