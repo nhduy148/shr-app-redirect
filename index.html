@@ -33,8 +33,8 @@
       //   }
       // });
       var browserMovedToBackground = false;
-      var isAndroid = /Android/.test(navigator.userAgent)
-      var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent)
+      var isAndroid = /Android/.test(navigator.userAgent);
+      var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
       // window.document.addEventListener("visibilitychange", function(e) {
       //   browserMovedToBackground = window.document.visibilityState === 'hidden' || window.document.visibilityState === 'unloaded';
 
@@ -56,12 +56,15 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         const qs = new URLSearchParams(window.location.search);
-        const query = qs.get('query')
-        if(typeof query !== 'string') {
+        const query = qs.get('query');
+        if (typeof query !== 'string') {
           return;
         }
-        if(isIOS) {
-          console.log('sharering://' + encodeURIComponent(query.replace('sharering://', '')))
+        if (isIOS) {
+          console.log(
+            'sharering://' +
+              encodeURIComponent(query.replace('sharering://', ''))
+          );
           console.log(query);
           AppRedirect.redirect({
             iosApp: 'sharering://123',
@@ -69,24 +72,32 @@
           });
           return;
         }
-        if(isAndroid) {
-        var appLink = document.getElementById('appLink');
-        if (appLink) {
-          appLink.addEventListener('click', function () {
-            window.location.href = 'sharering://query:647815ca2f1a65005d444954andkey%3DU2FsdGVkX1%2B8MPNkUuH3RnIkfFIiZtoQo8T9kvY1EiE%3Dandqr_owner%3Dshareledger1p076mghggt5xht32fep6nuudf068jcxewepgrn&apn=network.sharering.travel'
-            setTimeout(() => {
-              window.location.href = 'https://play.google.com/store/apps/details?id=network.sharering.identifime'
-            }, 300);
-          });
+        if (isAndroid) {
+          var appLink = document.getElementById('appLink');
+          if (appLink) {
+            appLink.addEventListener('click', function () {
+              window.location.href =
+                'sharering://query:647815ca2f1a65005d444954andkey%3DU2FsdGVkX1%2B8MPNkUuH3RnIkfFIiZtoQo8T9kvY1EiE%3Dandqr_owner%3Dshareledger1p076mghggt5xht32fep6nuudf068jcxewepgrn&apn=network.sharering.travel';
+              setTimeout(() => {
+                window.location.href =
+                  'https://play.google.com/store/apps/details?id=network.sharering.identifime';
+              }, 300);
+            });
+          }
+          return;
         }
-        return
-      }
-        window.location.href = 'https://www.sharering.network/'
-
+        window.location.href = 'https://www.sharering.network/';
       });
     </script>
     <style>
-      html, body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
