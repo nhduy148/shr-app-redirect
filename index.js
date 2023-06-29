@@ -1,7 +1,7 @@
 
-// Written by Daniel Cohen Gindi
-// danielgindi@gmail.com
-// http://github.com/danielgindi/app-redirect
+// Written by Duy Nguyen
+// nghduy6697@gmail.com
+// http://github.com/nhduy148
 
 (function () {
 
