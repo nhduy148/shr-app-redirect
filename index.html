@@ -7,92 +7,23 @@
     <title>Document</title>
     <script src="./index.js"></script>
     <script>
-      // var browserMovedToBackground = false;
-      var isAndroid = /Android/.test(navigator.userAgent);
-      var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
-      // document.addEventListener('DOMContentLoaded', () => {
-      //   if(isIOS) {
-      //     AppRedirect.redirect({
-      //       iosApp: 'sharering://',
-      //       iosAppStore: 'https://apps.apple.com/us/app/sharering/id1557434411',
-      //     });
-      //   }
-      //   var appLink = document.getElementById('appLink');
-      //   if (appLink) {
-      //     appLink.addEventListener('click', function () {
-      //       return AppRedirect.redirect({
-      //         android: {
-      //           host: 'app', // Host/path/querystring part in a custom scheme URL
-      //           // 'action': '', // Equivalent to ACTION in INTENTs
-      //           // 'category': '', // Equivalent to CATEGORY in INTENTs
-      //           // 'component': '', // Equivalent to COMPONENT in INTENTs
-      //           scheme: 'sharering', // Scheme part in a custom scheme URL
-      //           package: 'network.sharering.vault', // Package name in Play store
-      //           fallback:
-      //             'https://play.google.com/store/apps/details?id=network.sharering.identifime',
-      //         },
-      //       });
-      //     });
-      //   }
-      // });
+      // In the edge case where there are multiple values, the value is an array.
+      var qs = AppRedirect.queryString;
 
-      // window.document.addEventListener("visibilitychange", function(e) {
-      //   browserMovedToBackground = window.document.visibilityState === 'hidden' || window.document.visibilityState === 'unloaded';
+      // Here we initiate the redirect process
+      AppRedirect.redirect({
+        iosApp: 'sharering://query?query=' + qs['query'],
 
-      //   console.log("visibilitychange", window.document.visibilityState);
-      // });
-      // window.addEventListener("blur", function(e) {
-      //   browserMovedToBackground = true;
-      //   console.log("blur", browserMovedToBackground);
-      // });
+        iosAppStore: 'https://apps.apple.com/us/app/sharering/id1557434411?mt=8&query=' + qs['query'],
 
-      // if(isIOS) {
-      //   window.location = 'sharering://'
-      //   if(browserMovedToBackground) {
-      //     setTimeout(() => {
-      //       window.location.href = 'https://apps.apple.com/us/app/sharering/id1557434411'
-      //     }, 300);
-      //   }
-      // }
+        android: {
+          host: 'query/?query=' + qs['query'],
+          scheme: 'sharering',
+          package: 'network.sharering.travel',
+          fallback: 'https://play.google.com/store/apps/details?id=network.sharering.application&query=' + qs['query'],
+        },
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const qs = new URLSearchParams(window.location.search);
-        let query = qs.get('query');
-        if (typeof query !== 'string') {
-          return;
-        }
-        let url = '';
-        if (query.startsWith('sharering://query:')) {
-          url =
-            'sharering://query/?query=' +
-            decodeURIComponent(qs.toString().replace('sharering://', ''));
-        }
-        if (query.startsWith('sharering://login:')) {
-          url =
-            'sharering://login/?query=' +
-            decodeURIComponent(qs.toString().replace('sharering://', ''));
-        }
-        if (isIOS) {
-          AppRedirect.redirect({
-            iosApp: url,
-            iosAppStore: 'https://apps.apple.com/us/app/sharering/id1557434411',
-          });
-          return;
-        }
-        if (isAndroid) {
-          var appLink = document.getElementById('appLink');
-          if (appLink) {
-            appLink.addEventListener('click', function () {
-              window.location.href = url;
-              setTimeout(() => {
-                window.location.href =
-                  'https://play.google.com/store/apps/details?id=network.sharering.identifime';
-              }, 300);
-            });
-          }
-          return;
-        }
-        window.location.href = 'https://www.sharering.network/';
+        overallFallback: 'https://www.sharering.network/',
       });
     </script>
     <style>
